@@ -34,7 +34,6 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
 if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
 } else {
-//    echo $_FILES["fileToUpload"]["tmp_name"] ."   /    ". $target_file;
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         $basename =  basename( $_FILES["fileToUpload"]["name"]);
         echo "The file ". $basename. " has been uploaded.";

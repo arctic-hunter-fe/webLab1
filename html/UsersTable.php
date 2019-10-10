@@ -68,23 +68,25 @@
     if ($result->num_rows > 0) {
      $role=$_SESSION['role'];
         switch ($role) {
-            case 1:
+            case 1: //todo user
                 while ($row = $result->fetch_assoc()) {
+                    $id=$row["id"];
                     echo "<tr><form action='../php/infoabout.php' method='post'>
-                    <td>" . $row["id"] . "</td>
+                    <td>" . $id . "</td>
                     <td>" . $row["email"] . "</td>
                     <td>" . $row["first_name"] . " " . $row["last_name"] . "</td>
-                   <td>" . '<button type="button" class="btn btn-warning" onclick=location.href="../php/infoabout.php">info</button>' . "</td>
+                   <td>" . '<button type="submit" name="id" class="btn btn-warning" value='.$id.'; onclick=location.href="../php/infoabout.php">info</button>' . "</td>
                   </form></tr>";
                 }
                 break;
-            case 2:
+//                onclick=location.href="../php/infoabout.php?do="
+            case 2: //todo admin
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>
                     <td>" . $row["id"] . "</td>
                     <td>" . $row["email"] . "</td>
                     <td>" . $row["first_name"] . " " . $row["last_name"] . "</td>
-                   <td>" . '<button type="button" class="btn btn-danger" onclick=location.href="../php/deleteuser.php">delete</button>' . "</td>
+                   <td>" . '<button type="submit" name="id" class="btn btn-warning" value='.$id.'; onclick=location.href="../php/deleteuser.php">delete</button>' . "</td>
                   </tr>";
                 }
                 break;
