@@ -1,8 +1,11 @@
+<?php
+session_destroy();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
+    <title>Table</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/noBluredLoginStyle.css">
     <link rel="stylesheet" href="../css/table.css">
@@ -10,7 +13,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #374349;">
 
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand">
         <img src="../icons/icon1.png" width="30" height="30" class="d-inline-block align-top" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,34 +22,37 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link text-light" href="../html/Home.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link text-light" href="../html/Home.html">Home</a>
             </li>
-            <li class="nav-item" >
-                <a class="nav-link text-light" href="../html/UsersTable.php">Users Table</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-light" href="MyPage.php">My page</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-light" href="../html/Gallery.html">Maybe gallery</a>
-            </li>
-            <li class="nav-item">
-                <?php
+            <?php
+            if(!$_SESSION["name"]==NULL){
+                echo " <li class='nav-item'>";
                 require "../php/logout.php";
-                ?>
-                <a class="nav-link text-light " href="UsersTable.php?do=logout">Logout</a>
-            </li>
+                echo " <a class='nav-link text-light ' href='UsersTable.php?do=logout'>Logout</a></li>";
+            }
+
+            ?>
+
+
         </ul>
     </div>
 </nav>
+
 <div class="container mt-4">
-<h1><p class="text-right">Welcome,
-        <?php
-        session_start();
-        echo " " . $_SESSION["name"];
-        ?>
-    </p></h1>
+<?php
+if(!$_SESSION["name"]==NULL){
+    echo "<h1><p class='text-right'>Welcome,";
+    echo "<a href='../html/MyPage.php'>$_SESSION[name]</a></p></h1>";
+}else{
+    echo "<h1><p class='text-right' >";
+    echo "<a href='../html/login.html' style='color: #111111; text-decoration: none'>Sign IN</a></p></h1>";
+    $_SESSION["role"]=1; //make as a user
+    echo "<h2><p class='text-right'>";
+    echo "<a href='../html/registration.html' style='color: #111111; text-decoration: none'>Sign UP</a></p></h1>";
+}
+?>
 </div>
+
 <table class="table table-striped table-dark">
     <thead>
     <tr>
@@ -55,18 +61,42 @@
         <th>Name</th>
         <th>Action</th>
     </tr>
-    <!--        если админ то действие будет удалить, если не админ то кнопка помотреть профиль-->
     </thead>
     <tbody>
 
     <?php
-    session_start();
+//    session_start();
     require "../connect/connectBD.php";
     $sql = "SELECT id, email, first_name, last_name FROM users2";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-     $role=$_SESSION['role'];
+     $role=$_SESSION["role"];
+//     echo " role = " .$role;
+
+//        while ($row = $result->fetch_assoc()) {
+//            $id=$row["id"];
+//            echo "<tr>
+//                    <td>" . $id . "</td>
+//                    <td>" . $row["email"] . "</td>
+//                    <td>" . $row["first_name"] . " " . $row["last_name"] . "</td>";
+//
+//    switch ($role) {
+//            case 1: {
+//                $id2=$row["id"];
+//                echo "<td>" . '<button type="submit" name="id" class="btn btn-warning" value='.$id2. '; onclick=location.href="../php/infoabout.php">info</button>' . "</td>";
+//                break;
+//            }
+//            case 2: {
+//                $id3=$row["id"];
+//                echo "<td>" . '<button type="submit" name="id3" class="btn btn-danger" value='.$id3. '; onclick=location.href="../php/deleteuser.php">delete</button>' . "</td>";
+//                break;
+//            }
+//        }
+//        echo "</tr>";
+//    }
+
+
         switch ($role) {
             case 1: //todo user
                 while ($row = $result->fetch_assoc()) {
@@ -75,18 +105,18 @@
                     <td>" . $id . "</td>
                     <td>" . $row["email"] . "</td>
                     <td>" . $row["first_name"] . " " . $row["last_name"] . "</td>
-                   <td>" . '<button type="submit" name="id" class="btn btn-warning" value='.$id.'; onclick=location.href="../php/infoabout.php">info</button>' . "</td>
+                   <td>" . '<button type="submit" name="id" class="btn btn-warning" value='.$id. ';>info</button>' . "</td>
                   </form></tr>";
                 }
                 break;
-//                onclick=location.href="../php/infoabout.php?do="
             case 2: //todo admin
                 while ($row = $result->fetch_assoc()) {
-                    echo "<tr>
-                    <td>" . $row["id"] . "</td>
+                    $id2=$row["id"];
+                    echo "<tr><form action='../php/deleteuser.php' method='post'>
+                    <td>" . $id2 . "</td>
                     <td>" . $row["email"] . "</td>
                     <td>" . $row["first_name"] . " " . $row["last_name"] . "</td>
-                   <td>" . '<button type="submit" name="id" class="btn btn-warning" value='.$id.'; onclick=location.href="../php/deleteuser.php">delete</button>' . "</td>
+                   <td>" . '<button type="submit" name="id2" class="btn btn-danger" value='.$id2. '>delete</button>' . "</td>
                   </tr>";
                 }
                 break;

@@ -1,0 +1,17 @@
+.md-avatar.size-3 {
+    width: 90px;
+    height: 90px;
+}
+.md-avatar.size-4 {
+    width: 110px;
+    height: 110px;
+}
+
+.md-avatar.size-5 {
+    width: 200px;
+    height: 200px;
+}
+
+.email{
+    font-family: 'Mansalva', cursive;
+}
