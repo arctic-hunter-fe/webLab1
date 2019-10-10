@@ -1,0 +1,16 @@
+form{
+    width: 500px;
+    margin: auto;
+
+}
+
+body{
+    /*http://getwallpapers.com/wallpaper/full/6/a/1/741110-gorgerous-himalayas-wallpaper-2880x1800-windows-xp.jpg*/
+    background:url(../img/blured.jpg);
+    background-color: #eeffef;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+
+}
+
