@@ -1,6 +1,4 @@
-<?php
-session_destroy();
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +20,7 @@ session_destroy();
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link text-light" href="../html/Home.html">Home</a>
+                <a class="nav-link text-light" href="Home.php">Home</a>
             </li>
             <?php
             if(!$_SESSION["name"]==NULL){

@@ -1,0 +1,12 @@
+@import url(https://fonts.googleapis.com/css?family=Mansalva&display=swap);
+
+.worktext{
+    font-family: 'Mansalva', cursive;
+    color: #eeffef;
+}
+
+
+.md-avatar.size-5 {
+    width: 700px;
+    height: 500px;
+}

@@ -24,13 +24,13 @@
             $result = $conn->query($sql);
             $row = $result->fetch_assoc();
             echo "
-             <p class='display-3 loginText'>" . $row["first_name"] . " " . $row["last_name"] . "</p><br>
+             <p class='display-3 userInfo'>" . $row["first_name"] . " " . $row["last_name"] . "</p><br>
              <div class='form-row'>
                     <form class=' justify-content-center'>
-                        <div class='col'>
+                        <div class='col '>
                               <img class='size-5 md-avatar img-thumbnail rounded-circle float-right' alt='Cinque Terre' src='../uploaded/$row[image2]'  />
                         </div>
-                        <div class=' display-4 email col'>
+                        <div class=' display-4 userInfo col'>
                                <p >" . $row["email"] . "</p><br>
                         </div>
 

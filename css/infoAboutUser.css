@@ -1,3 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Mansalva&display=swap);
+
+.userInfo{
+    font-family: 'Mansalva', cursive;
+}
+
+
 .md-avatar.size-3 {
     width: 90px;
     height: 90px;
