@@ -3,10 +3,11 @@ $firstname = trim($_POST['firstname']);
 $lastname = trim($_POST['lastname']);
 $email = trim($_POST['email']);
 $pass = trim($_POST['pass']);
-//$role = trim($_POST['role']);   не хочет работать
+$role = trim($_POST['role']);
 
 if (mb_strlen($pass) < 6 || mb_strlen($pass) > 20) {
     alert("error in password length!");
+    header("Location: /tmp/html/registration.html");
     exit();
 }
 
